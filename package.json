@@ -1,0 +1,33 @@
+{
+  "name": "vue-admin-template",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test": "vue-cli-service test:unit"
+  },
+  "dependencies": {
+    "@wangeditor/editor": "^5.1.21",
+    "@wangeditor/editor-for-vue": "^1.0.2",
+    "axios": "^0.21.4",
+    "core-js": "^3.25.5",
+    "view-design": "^4.7.0",
+    "vue": "^2.7.10",
+    "vue-router": "^3.6.5",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.15",
+    "@vue/cli-plugin-eslint": "^4.5.15",
+    "@vue/cli-plugin-unit-jest": "^4.5.19",
+    "@vue/cli-service": "^4.5.15",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.7.10"
+  }
+}
