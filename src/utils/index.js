@@ -9,8 +9,8 @@ export function resetTokenAndClearUser() {
     resetRouter()
 }
 
-export const defaultDocumentTitle = 'vue-admin-template'
+export const defaultDocumentTitle = '徐敏技能大师工作室'
 export function getDocumentTitle(pageTitle) {
-    if (pageTitle) return `${defaultDocumentTitle} - ${pageTitle}`
+    if (pageTitle) return `${pageTitle}`
     return `${defaultDocumentTitle}`
 }
