@@ -9,14 +9,14 @@
             <Select v-model="status" style="width:150px; margin-left: 20px" placeholder="申报状态" clearable>
                 <Option v-for="item in statusList" :value="item.value" :key="item.value">{{ item.label }}</Option>
             </Select>
-            <DatePicker :value="daterange" type="daterange" placement="bottom-end" placeholder="授权日期" style="width: 200px; margin-left: 20px" @on-change="dateRangeChange" ></DatePicker>
+            <DatePicker :value="daterange" type="daterange" placement="bottom-end" placeholder="日期" style="width: 200px; margin-left: 20px" @on-change="dateRangeChange" ></DatePicker>
             <Button type="primary" style="margin-left: 20px" @click="search">查询</Button>
             <Button type="error" style="margin-left: 10px" @click="reset">重置</Button>
         </div>
         <Divider style="padding-top: 20px">专利列表</Divider>
         <div class="table">
             <Button type="primary" icon="md-add-circle" @click="register">专利登记</Button>
-            <Button type="primary" style="margin-left: 20px">列表导出</Button>
+            <Button type="primary" style="margin-left: 20px" @click="exportData">列表导出</Button>
             <Modal
                 v-model="registerModal"
                 title="专利登记"
@@ -41,7 +41,7 @@
                     <FormItem label="所属项目">
                         <Input v-model="formItem.project" placeholder="请输入该专利所属项目"></Input>
                     </FormItem>
-                    <FormItem label="授权日期">
+                    <FormItem label="日期">
                         <DatePicker type="date" format="yyyy-MM-dd" placement="bottom-end" placeholder="选择日期" :value="formItem.statusDate" @on-change="statusDateChange" ></DatePicker>
                         (申报/公开/授权 日期)
                     </FormItem>
@@ -77,27 +77,27 @@
                 @on-cancel="cancel">
                 <Form :model="resultItem" :label-width="120">
                     <FormItem label="专利名称">
-                        <Input v-model="resultItem.patentName" placeholder="专利名称" disabled></Input>
+                        <Input v-model="resultItem.patentName" placeholder="专利名称" readonly></Input>
                     </FormItem>
                     <FormItem label="发明人">
-                        <Input v-model="resultItem.inventor" placeholder="发明人" disabled></Input>
+                        <Input v-model="resultItem.inventor" placeholder="发明人" readonly></Input>
                     </FormItem>
                     <FormItem label="专利类型">
-                        <RadioGroup v-model="resultItem.patentType">
+                        <RadioGroup v-model="resultItem.patentType" disabled>
                             <Radio label="发明专利" disabled>发明专利</Radio>
                             <Radio label="实用新型" disabled>实用新型</Radio>
                             <Radio label="外观设计" disabled>外观设计</Radio>
                         </RadioGroup>
                     </FormItem>
                     <FormItem label="所属项目">
-                        <Input v-model="resultItem.project" placeholder="该专利所属项目" disabled></Input>
+                        <Input v-model="resultItem.project" placeholder="该专利所属项目" readonly></Input>
                     </FormItem>
                     <FormItem label="授权日期">
-                        <DatePicker type="date" placeholder="选择日期" format="yyyy-MM-dd" :value="resultItem.statusDate" disabled></DatePicker>
+                        <DatePicker type="date" placeholder="选择日期" format="yyyy-MM-dd" :value="resultItem.statusDate" readonly></DatePicker>
                         (申报/公开/授权 日期)
                     </FormItem>
                     <FormItem label="申报状态" >
-                        <RadioGroup v-model="resultItem.status" type="button">
+                        <RadioGroup v-model="resultItem.status" type="button" disabled>
                             <Radio label="授权" disabled>授权</Radio>
                             <Radio label="公开" disabled>公开</Radio>
                             <Radio label="申报中" disabled>申报中</Radio>
@@ -105,22 +105,22 @@
                     </FormItem>
                     <divider orientation="center">附件下载</divider>
                     <FormItem label="专利申请表" >
-                        <Input v-model="resultItem.appStoragePath" placeholder="专利申请表" style="width: 200px; padding-right: 20px" disabled></Input>
-                        <Button type="primary" ghost @click="downloadDoc" >下载</Button>
+                        <Input v-model="resultItem.appStoragePath" placeholder="专利申请表" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Button type="primary" ghost @click="downloadDoc(resultItem.appStoragePath)" >预览</Button>
                     </FormItem>
                     <FormItem label="技术交底书" >
-                        <Input v-model="resultItem.techFileStoragePath" placeholder="技术交底书" style="width: 200px; padding-right: 20px" disabled></Input>
-                        <Button type="primary" ghost @click="downloadDoc" >下载</Button>
+                        <Input v-model="resultItem.techFileStoragePath" placeholder="技术交底书" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Button type="primary" ghost @click="downloadDoc(resultItem.techFileStoragePath)" >预览</Button>
                     </FormItem>
                     <FormItem label="证书扫描件" >
-                        <Input v-model="resultItem.certStoragePath" placeholder="证书扫描件" style="width: 200px; padding-right: 20px" disabled></Input>
-                        <Button type="primary" ghost @click="downloadDoc" >下载</Button>
+                        <Input v-model="resultItem.certStoragePath" placeholder="证书扫描件" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Button type="primary" ghost @click="downloadDoc(resultItem.certStoragePath)" >预览</Button>
                     </FormItem>
                 </Form>
 
             </Modal>
             <div class="table-result" style="padding-top: 20px">
-                <Table border :columns="form_header" :data="form_list_content" :loading="loading" height="600">
+                <Table border :columns="form_header" :data="form_list_content" :loading="loading" height="600" ref="table">
                     <template slot-scope="{ row }" slot="name">
                         <strong>{{ row.name }}</strong>
                     </template>
@@ -358,10 +358,17 @@ export default {
             that.status = ''
             that.daterange = []
         },
+        //专利登记
         register() {
             let that = this
             that.resetForm()
             that.registerModal = true
+        },
+        //导出数据
+        exportData() {
+            this.$refs.table.exportCsv({
+                filename: '表格数据'
+            });
         },
         //选取文件
         getApplicationFile(event) {
@@ -645,8 +652,15 @@ export default {
         cancel () {
             // this.$Message.info('Clicked cancel');
         },
-        downloadDoc() {
-            //下载文档
+        //下载文档
+        downloadDoc(storagePath) {
+
+            console.log(storagePath)
+            if (storagePath === null || storagePath === '' || storagePath === 'null') {
+                this.$Message.error('资料待补充')
+            } else {
+                window.open('http://localhost:8088/achieve/filestore/' + storagePath, '_blank')
+            }
         },
         show(index) {
             let that = this
