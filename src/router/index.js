@@ -36,31 +36,31 @@ export const asyncRoutes = {
     techProject: {
         path: 'techProject',
         name: 'techProject',
-        meta: { title: '主页' },
+        meta: { title: '科技项目' },
         component: () => import('../views/techinno/TechProject.vue'),
     },
     skillInno: {
         path: 'skillInno',
         name: 'skillInno',
-        meta: { title: '主页' },
+        meta: { title: '技能创新' },
         component: () => import('../views/techinno/SkillInno.vue'),
     },
     qualityImprove: {
         path: 'qualityImprove',
         name: 'qualityImprove',
-        meta: { title: '主页' },
+        meta: { title: '质量改进' },
         component: () => import('../views/techinno/QualityImprove.vue'),
     },
     paper: {
         path: 'paper',
         name: 'paper',
-        meta: { title: '主页' },
+        meta: { title: '论文' },
         component: () => import('../views/techinno/Paper.vue'),
     },
     patent: {
         path: 'patent',
         name: 'patent',
-        meta: { title: '主页' },
+        meta: { title: '专利' },
         component: () => import('../views/techinno/Patent.vue'),
     },
     t1: {
