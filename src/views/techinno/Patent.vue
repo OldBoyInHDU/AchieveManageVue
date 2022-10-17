@@ -126,8 +126,8 @@
                     </template>
                     <template slot-scope="{ row, index }" slot="action">
                         <Button type="primary" size="small" style="margin-right: 5px" @click="show(index)">查看</Button>
-                        <Button type="warning" size="small"  @click="modify(index)">修改</Button>
-<!--                        <Button type="error" size="small" @click="remove(index)">删除</Button>-->
+                        <Button type="warning" size="small" style="margin-right: 5px" @click="modify(index)">修改</Button>
+                        <Button type="error" size="small" @click="remove(index)">删除</Button>
                     </template>
                 </Table>
                 <br>
@@ -233,7 +233,7 @@ export default {
                     title: '序号',
                     // key: 'id',
                     type: 'index',
-                    width: 75,
+                    width: 70,
                     render: (h, params) => h('span', {}, params.index + 1),
                 },
                 {
@@ -279,7 +279,7 @@ export default {
                 {
                     title: '操作',
                     slot: 'action',
-                    width: 150,
+                    width: 200,
                     align: 'center',
                 },
             ],
@@ -744,23 +744,26 @@ export default {
             return date
         },
         remove(index) {
-/*            let paramId = this.form_list_content[index].id
+            let paramId = this.form_list_content[index].id
             this.form_list_content.splice(index, 1)
-            // console.log('index' + index)
-            // console.log('paramId' + paramId)
-            axios.delete('http://localhost:8080/eduonline/forum/coursewareManage/deleteCoursewareInfo', {
-                params: {
-                    id: paramId,
-                },
-            }).then(
-                res => {
-                    // console.log(res)
-                },
-                err => {
-                    // console.log(err)
-                    this.$Message.error('后台服务出问题，请联系技术人员')
+            request.delete(
+                '/techInno/deletePatentById',
+                {
+                    headers: {
+                        'content-type': 'application/json;charset=UTF-8',
+                    },
+                    params: {
+                        id: paramId
+                    },
                 }
-            )*/
+            ).then(
+                res => {
+                    this.$Message.success('专利删除成功！')
+            }).catch(
+                err => {
+                    this.$Message.error('专利删除失败！请联系技术人员')
+                }
+            )
         },
         changePage(page) {
             let that = this

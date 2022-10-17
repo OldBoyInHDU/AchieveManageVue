@@ -7,12 +7,13 @@ import store from './store'
 import router from './router'
 import 'view-design/dist/styles/iview.css'
 import './permission'
+import request from "@/utils/request";
 
 Vue.config.productionTip = false
 Vue.use(ViewUI)
 
 Vue.prototype.$axios = axios
-Vue.prototype.service = service
+Vue.prototype.$request = request
 axios.defaults.baseURL = 'http://localhost:8088/achieve'
 
 new Vue({
