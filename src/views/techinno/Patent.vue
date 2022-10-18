@@ -9,13 +9,14 @@
             <Select v-model="status" style="width:150px; margin-left: 20px" placeholder="申报状态" clearable>
                 <Option v-for="item in statusList" :value="item.value" :key="item.value">{{ item.label }}</Option>
             </Select>
+            <Input v-model="project" placeholder="所属项目" style="width: 150px; margin-left: 20px" clearable/>
             <DatePicker :value="daterange" type="daterange" placement="bottom-end" placeholder="日期" style="width: 200px; margin-left: 20px" @on-change="dateRangeChange" ></DatePicker>
             <Button type="primary" style="margin-left: 20px" @click="search">查询</Button>
             <Button type="error" style="margin-left: 10px" @click="reset">重置</Button>
         </div>
         <Divider style="padding-top: 20px">专利列表</Divider>
         <div class="table">
-            <Button type="primary" icon="md-add-circle" @click="register">专利登记</Button>
+            <Button type="success" icon="md-add-circle" @click="register">专利登记</Button>
             <Button type="primary" style="margin-left: 20px" @click="exportData">列表导出</Button>
             <Modal
                 v-model="registerModal"
@@ -180,6 +181,7 @@ export default {
             inventor: '',
             patentType: '',
             status: '',
+            project: '',
             daterange: [], // 申报/公开/授权 时间区间 ['2016-01-01', '2016-02-15'] 需要搭配on-change使用
             //查询loading
             loading: false,
@@ -329,6 +331,7 @@ export default {
                         inventor: that.inventor,
                         patentType: that.patentType,
                         status: that.status,
+                        project: that.project,
                         startDate: dateList[0],
                         endDate: dateList[1],
                     },
@@ -356,6 +359,7 @@ export default {
             that.inventor = ''
             that.patentType = ''
             that.status = ''
+            that.project= ''
             that.daterange = []
         },
         //专利登记
