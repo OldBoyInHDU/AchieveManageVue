@@ -53,7 +53,7 @@
                             <Radio label="申报中">申报中</Radio>
                         </RadioGroup>
                     </FormItem>
-                    <divider orientation="center">附件上传</divider>
+                    <divider orientation="center">附件上传（PDF，不超过20mb）</divider>
                     <FormItem label="专利申请表" >
                         <input class="file-input" type="file" @change="getApplicationFile($event)" />
                         <Button type="primary" ghost @click="uploadApplication" :loading="loadingStatus1">{{ loadingStatus1 ? '上传中' : '上传文件' }}</Button><Icon type="ios-checkmark-circle" color="#19be6b" v-show="uploadStatus1"/>
