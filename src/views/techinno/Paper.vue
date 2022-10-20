@@ -311,6 +311,10 @@ export default {
                     key: 'searchProof',
                 },
                 {
+                    title: '更新时间',
+                    key: 'updateDate',
+                },
+                {
                     title: '操作',
                     slot: 'action',
                     width: 200,
