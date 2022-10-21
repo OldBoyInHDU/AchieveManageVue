@@ -63,6 +63,12 @@ export const asyncRoutes = {
         meta: { title: '专利' },
         component: () => import('../views/techinno/Patent.vue'),
     },
+    softwareCopyright: {
+        path: 'softwareCopyright',
+        name: 'softwareCopyright',
+        meta: { title: '软件著作权' },
+        component: () => import('../views/techinno/SoftwareCopyright.vue'),
+    },
     t1: {
         path: 't1',
         name: 't1',

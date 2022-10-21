@@ -51,6 +51,12 @@ const store = new Vuex.Store({
                         name: 'patent',
                         text: '专利',
                     },
+                    {
+                        size: 18, // icon大小
+                        type: 'md-wifi', // icon类型
+                        name: 'softwareCopyright',
+                        text: '软件著作权',
+                    },
                 ],
             },
             {
