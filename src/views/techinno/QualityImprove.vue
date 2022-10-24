@@ -13,7 +13,7 @@
             </Select>
             <Input v-model="leader" placeholder="项目负责人" style="width: 150px; margin-left: 20px" clearable/>
             <Input v-model="member" placeholder="主要完成人" style="width: 150px; margin-left: 20px" clearable/>
-            <DatePicker :value="daterange" format="yyyy/MM/dd" type="daterange" placeholder="选择日期" style="width: 200px; margin-left: 20px" @on-change="dateRangeChange" clearable></DatePicker>
+            <DatePicker :value="daterange" format="yyyy" type="year" placeholder="选择年度" style="width: 200px; margin-left: 20px" @on-change="dateRangeChange" clearable></DatePicker>
             <Button type="primary" style="margin-left: 20px" @click="search">查询</Button>
             <Button type="error" style="margin-left: 10px" @click="reset">重置</Button>
         </div>
@@ -51,10 +51,10 @@
                     </FormItem>
                     <FormItem label="项目类别" required>
                         <RadioGroup v-model="formItem.sort" type="button">
-                            <Radio label="QC创新">QC创新</Radio>
-                            <Radio label="QC问题解决">QC问题解决</Radio>
+                            <Radio label="QC创新型">QC创新型</Radio>
+                            <Radio label="QC问题解决型">QC问题解决型</Radio>
                             <Radio label="精益管理">精益管理</Radio>
-                            <Radio label="6σ改进">6σ改进</Radio>
+                            <Radio label="6σ改进型">6σ改进型</Radio>
                         </RadioGroup>
                     </FormItem>
                     <FormItem label="项目类型" required>
@@ -75,9 +75,9 @@
                             <Radio label="结题">结题</Radio>
                         </RadioGroup>
                     </FormItem>
-                    <FormItem label="日期">
-                        <DatePicker type="date" format="yyyy-MM-dd" placement="bottom-end" placeholder="选择日期" :value="formItem.statusDate" @on-change="statusDateChange" ></DatePicker>
-                        (立项/结题 日期)
+                    <FormItem label="年度">
+                        <DatePicker type="year" format="yyyy" placement="bottom-end" placeholder="选择年度" :value="formItem.statusDate" @on-change="statusDateChange" ></DatePicker>
+                        (立项/结题 年度)
                     </FormItem>
                     <FormItem label="获奖等级">
                         <Input v-model="formItem.award" placeholder="请输入获奖等级"></Input>
@@ -114,10 +114,10 @@
                     </FormItem>
                     <FormItem label="项目类别" required>
                         <RadioGroup v-model="resultItem.sort" type="button">
-                            <Radio label="QC创新" disabled>QC创新</Radio>
-                            <Radio label="QC问题解决" disabled>QC问题解决</Radio>
+                            <Radio label="QC创新型" disabled>QC创新型</Radio>
+                            <Radio label="QC问题解决型" disabled>QC问题解决型</Radio>
                             <Radio label="精益管理" disabled>精益管理</Radio>
-                            <Radio label="6σ改进" disabled>6σ改进</Radio>
+                            <Radio label="6σ改进型" disabled>6σ改进型</Radio>
                         </RadioGroup>
                     </FormItem>
                     <FormItem label="项目类型" required>
@@ -138,9 +138,9 @@
                             <Radio label="结题" disabled>结题</Radio>
                         </RadioGroup>
                     </FormItem>
-                    <FormItem label="日期">
-                        <DatePicker type="date" format="yyyy-MM-dd" placement="bottom-end" placeholder="选择日期" :value="resultItem.statusDate" @on-change="statusDateChange" readonly></DatePicker>
-                        (立项/结题 日期)
+                    <FormItem label="年度">
+                        <DatePicker type="year" format="yyyy" placement="bottom-end" placeholder="选择年度" :value="resultItem.statusDate" @on-change="statusDateChange" readonly></DatePicker>
+                        (立项/结题 年度)
                     </FormItem>
                     <FormItem label="获奖等级">
                         <Input v-model="resultItem.award" placeholder="请输入获奖等级" readonly></Input>
@@ -177,20 +177,20 @@ export default {
         return {
             sortList: [
                 {
-                    value: 'QC创新',
-                    label: 'QC创新'
+                    value: 'QC创新型',
+                    label: 'QC创新型'
                 },
                 {
-                    value: 'QC问题解决',
-                    label: 'QC问题解决'
+                    value: 'QC问题解决型',
+                    label: 'QC问题解决型'
                 },
                 {
                     value: '精益管理',
                     label: '精益管理'
                 },
                 {
-                    value: '6σ改进',
-                    label: '6σ改进'
+                    value: '6σ改进型',
+                    label: '6σ改进型'
                 },
             ],
             typeList: [
@@ -219,7 +219,7 @@ export default {
             status: '',
             leader: '',
             member: '',
-            daterange: [],
+            daterange: '',
             //查询loading
             loading: false,
             registerModal: false,
@@ -280,7 +280,7 @@ export default {
                     key: 'status',
                 },
                 {
-                    title: '立项/结题 日期',
+                    title: '立项/结题 年度',
                     key: 'statusDate',
                 },
                 {
@@ -312,7 +312,7 @@ export default {
         },
         async search() {
             let that = this
-            let dateList = this.daterange
+            // let dateList = this.daterange
             await request.get(
                 '/techInno/getQualityImprove',
                 {
@@ -326,8 +326,7 @@ export default {
                         status: that.status,
                         leader: that.leader,
                         member: that.member,
-                        startDate: dateList[0],
-                        endDate: dateList[1],
+                        year: that.daterange
                     },
                 },
             ).then(
@@ -355,7 +354,7 @@ export default {
             that.leader = ''
             that.member = ''
             that.status = ''
-            that.daterange = []
+            that.daterange = ''
         },
         resetForm() {
             let that = this
@@ -408,6 +407,10 @@ export default {
             }
             if(that.formItem.type === '' || that.formItem.type === null) {
                 this.$Message.error('请选择项目类型！')
+                return
+            }
+            if(that.formItem.leader === '' || that.formItem.leader === null) {
+                this.$Message.error('请输入项目负责人！')
                 return
             }
             if(that.formItem.member === '' || that.formItem.member === null) {
@@ -537,6 +540,7 @@ export default {
                     that.formItem.status = res.data.status
                     that.formItem.award = res.data.award
                     that.formItem.uploadList = []
+                    this.$refs.upload.clearFiles()
                 }
             ).catch(
                 err => {
