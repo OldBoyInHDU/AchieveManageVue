@@ -306,9 +306,6 @@ export default {
         }
     },
     methods: {
-        reback() {
-            this.$router.back()
-        },
         dateRangeChange(date) {
             // let dateStr = new Date(date, 'yyyy-MM-dd').toString();
             // console.log('dateStr:' + dateStr)
