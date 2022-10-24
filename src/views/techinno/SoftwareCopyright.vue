@@ -113,13 +113,13 @@
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">
                     <FormItem label="软件名称" required>
-                        <Input v-model="resultItem.rightName" placeholder="请输入论文标题" readonly></Input>
+                        <Input v-model="resultItem.rightName" placeholder="请输入软著标题" readonly></Input>
                     </FormItem>
                     <FormItem label="著作权人" required>
-                        <Input v-model="resultItem.author" placeholder="请输入论文作者" readonly></Input>
+                        <Input v-model="resultItem.author" placeholder="请输入软著作者" readonly></Input>
                     </FormItem>
                     <FormItem label="所属项目">
-                        <Input v-model="resultItem.project" placeholder="请输入该论文所属项目" readonly></Input>
+                        <Input v-model="resultItem.project" placeholder="请输入该软著所属项目" readonly></Input>
                     </FormItem>
                     <FormItem label="日期">
                         <DatePicker type="date" format="yyyy-MM-dd" placement="bottom-end" placeholder="选择日期" :value="resultItem.statusDate" @on-change="statusDateChange" readonly></DatePicker>

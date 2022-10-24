@@ -11,14 +11,14 @@
             <Button type="primary" style="margin-left: 20px" @click="search">查询</Button>
             <Button type="error" style="margin-left: 10px" @click="reset">重置</Button>
         </div>
-        <Divider style="padding-top: 20px">专利列表</Divider>
+        <Divider style="padding-top: 20px">论文列表</Divider>
         <div class="table">
-            <Button type="success" icon="md-add-circle" @click="register">文章登记</Button>
+            <Button type="success" icon="md-add-circle" @click="register">论文登记</Button>
             <Button type="primary" style="margin-left: 20px" @click="exportData">列表导出</Button>
-<!--            专利登记modal-->
+<!--            论文登记modal-->
             <Modal
                 v-model="registerModal"
-                title="专利登记"
+                title="论文登记"
                 width="520"
                 ok-text="提交"
                 @on-ok="submit"
@@ -123,7 +123,7 @@
 <!--            查看modal-->
             <Modal
                 v-model="showModal"
-                title="专利登记"
+                title="论文登记"
                 width="520"
                 ok-text="提交"
                 @on-ok="submit"
@@ -221,7 +221,7 @@ export default {
             //弹出框 Modal条件
             registerModal: false, // 登记modal
             showModal: false, // 查看modal
-            // 文章登记表单
+            // 论文登记表单
             formItem: {
                 paperName: '',
                 author: '',
@@ -381,7 +381,7 @@ export default {
             that.project = ''
             that.daterange = []
         },
-        //专利登记
+        //论文登记
         register() {
             let that = this
             that.resetForm()
@@ -442,7 +442,7 @@ export default {
         },
         submit() {
             let that = this
-            //判断必填项 专利名称 和 发明人 是否为空
+            //判断必填项 论文名称 和 发明人 是否为空
             if(that.formItem.paperName === '' && that.formItem.author === '') {
                 this.$Message.error('请填写论文标题和作者！')
                 return
@@ -477,12 +477,12 @@ export default {
                 res => {
                     console.log(res)
                     this.resetForm()
-                    this.$Message.info('专利登记成功')
+                    this.$Message.info('论文登记成功')
                 }
             ).catch(
                 err => {
                     console.log(err)
-                    this.$Message.error('专利登记失败')
+                    this.$Message.error('论文登记失败')
                 }
             )
         },
@@ -560,7 +560,7 @@ export default {
             ).catch(
                 err => {
                     console.log(err)
-                    this.$Message.error('专利查看失败')
+                    this.$Message.error('论文查看失败')
                 }
             )
         },
@@ -601,7 +601,7 @@ export default {
             ).catch(
                 err => {
                     console.log(err)
-                    this.$Message.error('专利查看失败')
+                    this.$Message.error('论文查看失败')
                 }
             )
         },
@@ -620,10 +620,10 @@ export default {
                 }
             ).then(
                 res => {
-                    this.$Message.success('专利删除成功！')
+                    this.$Message.success('论文删除成功！')
                 }).catch(
                 err => {
-                    this.$Message.error('专利删除失败！请联系技术人员')
+                    this.$Message.error('论文删除失败！请联系技术人员')
                 }
             )
         },
