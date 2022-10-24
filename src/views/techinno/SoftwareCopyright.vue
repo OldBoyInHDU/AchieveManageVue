@@ -174,7 +174,7 @@
 import request from "@/utils/request";
 
 export default {
-    name: 'paper',
+    name: 'softwareCopyright',
     data() {
         return {
             statusList: [
