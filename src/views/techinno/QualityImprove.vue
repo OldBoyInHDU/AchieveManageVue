@@ -41,7 +41,7 @@
             <Modal
                 v-model="registerModal"
                 title="项目登记"
-                width="520"
+                width="550"
                 ok-text="提交"
                 @on-ok="submit"
                 @on-cancel="cancel" scrollable draggable>
@@ -104,7 +104,7 @@
             <Modal
                 v-model="showModal"
                 title="项目查看"
-                width="520"
+                width="550"
                 ok-text="确定"
                 @on-ok="submit"
                 @on-cancel="cancel" scrollable draggable>
@@ -559,15 +559,17 @@ export default {
         remove() {
             let index = this.delDocIndex
             let paramId = this.form_list_content[index].id
+            let paramProj = this.toDeleteDoc
             this.form_list_content.splice(index, 1)
             request.delete(
-                '/techInno/deleteQIById',
+                '/techInno/deleteQIAndDoc',
                 {
                     headers: {
                         'content-type': 'application/json;charset=UTF-8',
                     },
                     params: {
-                        id: paramId
+                        id: paramId,
+                        project: paramProj
                     },
                 }
             ).then(
