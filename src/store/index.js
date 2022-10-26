@@ -60,6 +60,12 @@ const store = new Vuex.Store({
                 ],
             },
             {
+                name: 'personTrain', // 要跳转的路由名称 不是路径
+                size: 18, // icon大小
+                type: 'md-person-add', // icon类型
+                text: '人才培养', //
+            },
+            {
                 name: 'other', // 要跳转的路由名称 不是路径
                 size: 18, // icon大小
                 type: 'ios-egg-outline', // icon类型

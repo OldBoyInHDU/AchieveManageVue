@@ -69,6 +69,12 @@ export const asyncRoutes = {
         meta: { title: '软件著作权' },
         component: () => import('../views/techinno/SoftwareCopyright.vue'),
     },
+    personTrain: {
+        path: 'personTrain',
+        name: 'personTrain',
+        meta: { title: '人才培养' },
+        component: () => import('../views/persontrain/PersonTrain.vue'),
+    },
     t1: {
         path: 't1',
         name: 't1',
