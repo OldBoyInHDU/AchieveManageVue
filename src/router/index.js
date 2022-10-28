@@ -69,11 +69,35 @@ export const asyncRoutes = {
         meta: { title: '软件著作权' },
         component: () => import('../views/techinno/SoftwareCopyright.vue'),
     },
+    award: {
+        path: 'award',
+        name: 'award',
+        meta: { title: '奖励荣誉' },
+        component: () => import('../views/award/Award.vue'),
+    },
     personTrain: {
         path: 'personTrain',
         name: 'personTrain',
         meta: { title: '人才培养' },
         component: () => import('../views/persontrain/PersonTrain.vue'),
+    },
+    cooperation: {
+        path: 'cooperation',
+        name: 'cooperation',
+        meta: { title: '合作交流' },
+        component: () => import('../views/cooperation/Cooperation.vue'),
+    },
+    studio: {
+        path: 'studio',
+        name: 'studio',
+        meta: { title: '工作室设置' },
+        component: () => import('../views/studio/Studio.vue'),
+    },
+    rules: {
+        path: 'rules',
+        name: 'rules',
+        meta: { title: '规章制度' },
+        component: () => import('../views/rules/Rules.vue'),
     },
     t1: {
         path: 't1',

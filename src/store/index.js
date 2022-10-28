@@ -60,12 +60,36 @@ const store = new Vuex.Store({
                 ],
             },
             {
+                name: 'award', // 要跳转的路由名称 不是路径
+                size: 18, // icon大小
+                type: 'md-trophy', // icon类型
+                text: '奖励荣誉', //
+            },
+            {
                 name: 'personTrain', // 要跳转的路由名称 不是路径
                 size: 18, // icon大小
                 type: 'md-person-add', // icon类型
                 text: '人才培养', //
             },
             {
+                name: 'cooperation', // 要跳转的路由名称 不是路径
+                size: 18, // icon大小
+                type: 'md-swap', // icon类型
+                text: '合作交流', //
+            },
+            {
+                name: 'studio', // 要跳转的路由名称 不是路径
+                size: 18, // icon大小
+                type: 'md-podium', // icon类型
+                text: '工作室设置', //
+            },
+            {
+                name: 'rules', // 要跳转的路由名称 不是路径
+                size: 18, // icon大小
+                type: 'md-clipboard', // icon类型
+                text: '规章制度', //
+            },
+/*            {
                 name: 'other', // 要跳转的路由名称 不是路径
                 size: 18, // icon大小
                 type: 'ios-egg-outline', // icon类型
@@ -125,7 +149,7 @@ const store = new Vuex.Store({
                         ],
                     },
                 ],
-            },
+            },*/
         ],
     },
     mutations: {
