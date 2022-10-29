@@ -71,7 +71,7 @@
                     </div>
                 </Form>
             </Modal>
-            <!--            项目查看-->
+            <!--            培训查看-->
 <!--            <Modal
                 v-model="showModal"
                 title="查看培训"
@@ -119,7 +119,7 @@
                 @on-ok="remove()"
                 ok-text="删除"
                 @on-cancel="cancel">
-                <p>确定删除《{{toDeleteDoc}}》项目吗？</p>
+                <p>确定删除《{{toDeleteDoc}}》培训吗？</p>
             </Modal>
         </div>
     </div>
@@ -371,13 +371,13 @@ export default Vue.extend({
             ).then(
                 res => {
                     console.log(res)
-                    that.$Message.success('项目登记成功！')
+                    that.$Message.success('培训登记成功！')
                     // that.showUploadListFlag = false
                 }
             ).catch(
                 err => {
                     console.log(err)
-                    that.$Message.error('项目登记失败，请联系技术人员')
+                    that.$Message.error('培训登记失败，请联系技术人员')
                     // that.showUploadListFlag = false
                 }
             )
@@ -416,7 +416,7 @@ export default Vue.extend({
             ).catch(
                 err => {
                     console.log(err)
-                    this.$Message.error('项目查看失败')
+                    this.$Message.error('培训查看失败')
                 }
             )
             request.get(
@@ -437,7 +437,7 @@ export default Vue.extend({
             ).catch(
                 err => {
                     console.log(err)
-                    this.$Message.error('项目查看失败')
+                    this.$Message.error('培训查看失败')
                 }
             )
         },*/
@@ -468,7 +468,7 @@ export default Vue.extend({
             ).catch(
                 err => {
                     console.log(err)
-                    this.$Message.error('项目修改失败')
+                    this.$Message.error('培训修改失败')
                 }
             )
         },
@@ -496,10 +496,10 @@ export default Vue.extend({
                 }
             ).then(
                 res => {
-                    this.$Message.success('项目删除成功！')
+                    this.$Message.success('培训删除成功！')
                 }).catch(
                 err => {
-                    this.$Message.error('项目删除失败！请联系技术人员')
+                    this.$Message.error('培训删除失败！请联系技术人员')
                 }
             )
         },
