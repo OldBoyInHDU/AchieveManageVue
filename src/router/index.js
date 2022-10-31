@@ -90,8 +90,14 @@ export const asyncRoutes = {
     studio: {
         path: 'studio',
         name: 'studio',
-        meta: { title: '工作室设置' },
+        meta: { title: '工作室/领班人简介' },
         component: () => import('../views/studio/Studio.vue'),
+    },
+    member: {
+        path: 'member',
+        name: 'member',
+        meta: { title: '成员管理' },
+        component: () => import('../views/studio/Member.vue'),
     },
     rules: {
         path: 'rules',
