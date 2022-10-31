@@ -93,7 +93,7 @@
                 title="荣誉查看"
                 width="550"
                 ok-text="确定"
-                @on-ok="submit"
+                @on-ok="ok"
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">
                     <FormItem label="荣誉类别" required>
@@ -426,9 +426,10 @@ export default {
                 }
             )
         },
+        ok() {
+
+        },
         cancel() {
-            let that = this
-            that.confirmModal = false
             this.$Message.info('已取消')
         },
         show(index) {

@@ -109,7 +109,7 @@
                 title="软著登记"
                 width="520"
                 ok-text="提交"
-                @on-ok="submit"
+                @on-ok="ok"
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">
                     <FormItem label="软件名称" required>
@@ -455,6 +455,9 @@ export default {
             this.$refs.upload2.clearFiles()
             this.$refs.upload3.clearFiles()
             this.$refs.upload4.clearFiles()
+        },
+        ok() {
+
         },
         cancel() {
 

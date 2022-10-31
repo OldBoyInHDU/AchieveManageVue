@@ -106,7 +106,7 @@
                 title="项目查看"
                 width="550"
                 ok-text="确定"
-                @on-ok="submit"
+                @on-ok="ok"
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">
                     <FormItem label="项目名称" required>
@@ -453,6 +453,9 @@ export default {
                     // that.showUploadListFlag = false
                 }
             )
+        },
+        ok() {
+
         },
         cancel() {
             let that = this

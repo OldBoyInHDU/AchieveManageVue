@@ -48,7 +48,7 @@
                 title="制度登记"
                 width="520"
                 ok-text="提交"
-                @on-ok="submit"
+                @on-ok="ok"
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">
                     <FormItem label="制度标题" required>
@@ -278,6 +278,9 @@ export default {
             that.formItem.rule = ''
             that.formItem.ruleStoragePath = ''
             this.$refs.upload.clearFiles()
+        },
+        ok() {
+
         },
         cancel() {
 
