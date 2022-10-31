@@ -93,7 +93,7 @@
                             :on-remove="handleRemove"
                             multiple
                             accept="application/pdf"
-                            action="http://localhost:8088/achieve/techInno/qiUpload">
+                            action="http://localhost:8080/achieve/techInno/qiUpload">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -587,7 +587,7 @@ export default {
             if (storagePath === null || storagePath === '' || storagePath === 'null') {
                 this.$Message.error('资料待补充')
             } else {
-                window.open('http://localhost:8088/achieve/filestore/' + storagePath, '_blank')
+                window.open('http://localhost:8080/achieve/filestore/' + storagePath, '_blank')
             }
         },
         changePage(page) {

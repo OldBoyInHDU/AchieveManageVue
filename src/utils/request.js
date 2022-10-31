@@ -5,7 +5,7 @@ import { showLoading, closeLoading } from '@/utils/loading'
 import { resetTokenAndClearUser } from '@/utils'
 
 const request = axios.create({
-    baseURL: 'http://localhost:8088/achieve',
+    baseURL: 'http://localhost:8080/achieve',
     timeout: 60000,
 })
 

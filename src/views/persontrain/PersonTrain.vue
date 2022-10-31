@@ -228,7 +228,7 @@ export default Vue.extend({
                 MENU_CONF: {
                     uploadImage: {
                         fieldName: 'file',
-                        server: 'http://localhost:8088/achieve/uploadImg',
+                        server: 'http://localhost:8080/achieve/uploadImg',
                         maxFileSize: 5 * 1024 * 1024, // 5M
                         maxNumberOfFiles: 10,
                         allowedFileTypes: ['image/*'],
