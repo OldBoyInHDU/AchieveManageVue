@@ -45,7 +45,7 @@
             <!--            查看modal-->
             <Modal
                 v-model="showModal"
-                title="制度登记"
+                title="制度查看"
                 width="520"
                 ok-text="提交"
                 @on-ok="ok"
