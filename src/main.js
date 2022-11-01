@@ -8,12 +8,14 @@ import router from './router'
 import 'view-design/dist/styles/iview.css'
 import './permission'
 import request from "@/utils/request";
+import api from "@/utils/api"
 
 Vue.config.productionTip = false
 Vue.use(ViewUI)
 
 Vue.prototype.$axios = axios
 Vue.prototype.$request = request
+Vue.prototype.api = api
 axios.defaults.baseURL = 'http://localhost:8088/achieve'
 
 new Vue({

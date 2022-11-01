@@ -590,7 +590,8 @@ export default {
             if (storagePath === null || storagePath === '' || storagePath === 'null') {
                 this.$Message.error('资料待补充')
             } else {
-                window.open('http://localhost:8080/achieve/filestore/' + storagePath, '_blank')
+                // window.open('http://localhost:8080/achieve/filestore/' + storagePath, '_blank')
+                window.open(this.api.FileStoreURL + storagePath, '_blank')
             }
         },
         changePage(page) {
