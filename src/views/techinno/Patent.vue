@@ -55,16 +55,46 @@
                     </FormItem>
                     <divider orientation="center">附件上传（PDF，不超过20mb）</divider>
                     <FormItem label="专利申请表" >
-                        <input class="file-input" type="file" @change="getApplicationFile($event)" />
-                        <Button type="primary" ghost @click="uploadApplication" :loading="loadingStatus1">{{ loadingStatus1 ? '上传中' : '上传文件' }}</Button><Icon type="ios-checkmark-circle" color="#19be6b" v-show="uploadStatus1"/>
+                        <Upload
+                            ref="upload1"
+                            :show-upload-list="true"
+                            :format="['pdf']"
+                            :max-size="20480"
+                            :on-success="handleSuccess1"
+                            :on-remove="handleRemove1"
+                            accept="application/pdf"
+                            action="http://localhost:8080/achieve/techInno/patentUpload">
+                            <Button icon="ios-cloud-upload-outline">上传文件</Button>
+                            <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
+                        </Upload>
                     </FormItem>
                     <FormItem label="技术交底书" >
-                        <input class="file-input" type="file" @change="getTechFile($event)" />
-                        <Button type="primary" ghost @click="uploadTechFile" :loading="loadingStatus2">{{ loadingStatus2 ? '上传中' : '上传文件' }}</Button><Icon type="ios-checkmark-circle" color="#19be6b" v-show="uploadStatus2"/>
+                        <Upload
+                            ref="upload2"
+                            :show-upload-list="true"
+                            :format="['pdf']"
+                            :max-size="20480"
+                            :on-success="handleSuccess2"
+                            :on-remove="handleRemove2"
+                            accept="application/pdf"
+                            action="http://localhost:8080/achieve/techInno/patentUpload">
+                            <Button icon="ios-cloud-upload-outline">上传文件</Button>
+                            <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
+                        </Upload>
                     </FormItem>
                     <FormItem label="证书扫描件" >
-                        <input class="file-input" type="file" @change="getCertFile($event)" />
-                        <Button type="primary" ghost @click="uploadCert" :loading="loadingStatus3">{{ loadingStatus3 ? '上传中' : '上传文件' }}</Button><Icon type="ios-checkmark-circle" color="#19be6b" v-show="uploadStatus3"/>
+                        <Upload
+                            ref="upload3"
+                            :show-upload-list="true"
+                            :format="['pdf']"
+                            :max-size="20480"
+                            :on-success="handleSuccess3"
+                            :on-remove="handleRemove3"
+                            accept="application/pdf"
+                            action="http://localhost:8080/achieve/techInno/patentUpload">
+                            <Button icon="ios-cloud-upload-outline">上传文件</Button>
+                            <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
+                        </Upload>
                     </FormItem>
                 </Form>
 
@@ -217,18 +247,6 @@ export default {
                 cert: '',
                 certStoragePath: ''
             },
-            file1: null,
-            file2: null,
-            file3: null,
-            filename1: '',
-            filename2: '',
-            filename3: '',
-            loadingStatus1: false,
-            loadingStatus2: false,
-            loadingStatus3: false,
-            uploadStatus1: false,
-            uploadStatus2: false,
-            uploadStatus3: false,
             //查询结果
             form_header: [
                 {
@@ -285,20 +303,7 @@ export default {
                     align: 'center',
                 },
             ],
-            form_list_content: [
-                // {
-                //     patentName: '一种切丝机改进方法',
-                //     inventor: '黄桁',
-                //     patentType: '发明专利',
-                //     project: '切丝机质量改进',
-                //     status: '授权',
-                //     statusDate: '2022-09-20',
-                //     application: '专利申请表',
-                //     techFile: '技术交底书',
-                //     cert: '专利证书',
-                //     updateDate: '2022-10-08'
-                // }
-            ], // 当前展示的数据
+            form_list_content: [], // 当前展示的数据
             form_total_content: [], // 一次性请求的所有数据
             page: 1, // 当前页
             pageSize: 10, // 一页展示10条数据
@@ -371,215 +376,34 @@ export default {
                 filename: '表格数据'
             });
         },
-        //选取文件
-        getApplicationFile(event) {
+        handleSuccess1 (res, file) {
+            console.log(res)
             let that = this
-            that.file1 = event.target.files[0]
-            that.filename1 = that.file1.name
-            console.log(that.filename1)
+            that.formItem.application = file.name
+            that.formItem.appStoragePath = res.data
         },
-        getTechFile(event) {
-            let that = this
-            that.file2 = event.target.files[0]
-            that.filename2 = that.file2.name
-            console.log(that.filename2)
+        handleRemove1(file) {
+            // let fileList = this.$refs.upload1.fileList
+            // this.$refs.upload1.fileList.splice(fileList.indexOf(file), 1)
+            this.$refs.upload1.clearFiles()
         },
-        getCertFile(event) {
+        handleSuccess2 (res, file) {
+            console.log(res)
             let that = this
-            that.file3 = event.target.files[0]
-            that.filename3 = that.file3.name
-            console.log(that.filename3)
+            that.formItem.techFile = file.name
+            that.formItem.techFileStoragePath = res.data
         },
-        uploadApplication() {
-            //上传文档
-            let that = this
-            let uncheckedFile = this.file1
-            if (uncheckedFile == null) {
-                this.$Message.error('未选择文件！请先选择文件！')
-                return
-            }
-            let isRight = this.beforeUploadApplication(uncheckedFile)
-            if (!isRight) {
-                this.$Message.error('请重新上传文件')
-                return
-            }
-            let checkedFile = uncheckedFile
-            let formData = new FormData()
-            formData.append('file', checkedFile)
-            that.loadingStatus1 = true
-            request.post(
-                'techInno/patentUpload',
-                formData,
-                {
-                    headers: {
-                        'content-type': 'multipart/form-data',
-                    }
-                }
-            ).then(
-                res => {
-                    console.log('文件上传成功')
-                    console.log(res.data)
-                    that.loadingStatus1 = false
-                    that.uploadStatus1 = true
-                    that.formItem.application = that.filename1
-                    that.formItem.appStoragePath = res.data
-                    console.log('application:' + that.formItem.application + '/' + that.formItem.appStoragePath)
-            }).catch(
-                err => {
-                    console.log('文件上传失败')
-                    console.log(err.data)
-                    this.$Message.error('后台服务出问题，请联系技术人员')
-                }
-            )
+        handleRemove2(file) {
+            this.$refs.upload2.clearFiles()
         },
-
-        uploadTechFile() {
-            //上传文档
+        handleSuccess3 (res, file) {
+            console.log(res)
             let that = this
-            let uncheckedFile = this.file2
-            if (uncheckedFile == null) {
-                this.$Message.error('未选择文件！请先选择文件！')
-                return
-            }
-            let isRight = this.beforeUploadTechFile(uncheckedFile)
-            if (!isRight) {
-                this.$Message.error('请重新上传文件')
-                return
-            }
-            let checkedFile = uncheckedFile
-            let formData = new FormData()
-            formData.append('file', checkedFile)
-            that.loadingStatus2 = true
-            request.post(
-                'techInno/patentUpload',
-                formData,
-                {
-                    headers: {
-                        'content-type': 'multipart/form-data',
-                    }
-                }
-            ).then(
-                res => {
-                    console.log('文件上传成功')
-                    console.log(res.data)
-                    that.loadingStatus2 = false
-                    that.uploadStatus2 = true
-                    that.formItem.techFile = that.filename2
-                    that.formItem.techFileStoragePath = res.data
-                    console.log('techFile:' + that.formItem.techFile + '/' + that.formItem.techFileStoragePath)
-                }).catch(
-                err => {
-                    console.log('文件上传失败')
-                    console.log(err.data)
-                    this.$Message.error('后台服务出问题，请联系技术人员')
-                }
-            )
+            that.formItem.cert = file.name
+            that.formItem.certStoragePath = res.data
         },
-
-        uploadCert() {
-            //上传文档
-            let that = this
-            let uncheckedFile = this.file3
-            if (uncheckedFile == null) {
-                this.$Message.error('未选择文件！请先选择文件！')
-                return
-            }
-            let isRight = this.beforeUploadCert(uncheckedFile)
-            if (!isRight) {
-                this.$Message.error('请重新上传文件')
-                return
-            }
-            let checkedFile = uncheckedFile
-            let formData = new FormData()
-            formData.append('file', checkedFile)
-            that.loadingStatus3 = true
-            request.post(
-                'techInno/patentUpload',
-                formData,
-                {
-                    headers: {
-                        'content-type': 'multipart/form-data',
-                    }
-                }
-            ).then(
-                res => {
-                    console.log('文件上传成功')
-                    console.log(res.data)
-                    that.loadingStatus3 = false
-                    that.uploadStatus3 = true
-                    that.formItem.cert = that.filename3
-                    that.formItem.certStoragePath = res.data
-                    console.log('cert:' + that.formItem.cert + '/' + that.formItem.certStoragePath)
-                }).catch(
-                err => {
-                    console.log('文件上传失败')
-                    console.log(err.data)
-                    this.$Message.error('后台服务出问题，请联系技术人员')
-                }
-            )
-        },
-        beforeUploadApplication(file) {
-            let that = this
-            let name = file.name
-            // console.log(name)
-            let suffix = name.substring(name.lastIndexOf('.'))
-            // console.log(suffix)
-            let isNameLegal = true
-            let isLs2M = true
-            let isRight = true
-            isNameLegal = suffix === '.pdf'
-            isLs2M = file.size / 1024 / 1024 < 200
-            if (!isLs2M || !isNameLegal) {
-                that.loadingStatus = false
-                this.$Message.error('上传的文件大小不能超过200MB 且 格式为pdf！')
-                isRight = false
-            }
-            that.filename1 = file.name
-            that.file1 = file
-            // 一定要return false 不然会直接上传
-            return isRight
-        },
-        beforeUploadTechFile(file) {
-            let that = this
-            let name = file.name
-            // console.log(name)
-            let suffix = name.substring(name.lastIndexOf('.'))
-            // console.log(suffix)
-            let isNameLegal = true
-            let isLs2M = true
-            let isRight = true
-            isNameLegal = suffix === '.pdf'
-            isLs2M = file.size / 1024 / 1024 < 200
-            if (!isLs2M || !isNameLegal) {
-                that.loadingStatus = false
-                this.$Message.error('上传的文件大小不能超过200MB 且 格式为pdf！')
-                isRight = false
-            }
-            that.filename2 = file.name
-            that.file2 = file
-            // 一定要return false 不然会直接上传
-            return isRight
-        },
-        beforeUploadCert(file) {
-            let that = this
-            let name = file.name
-            // console.log(name)
-            let suffix = name.substring(name.lastIndexOf('.'))
-            // console.log(suffix)
-            let isNameLegal = true
-            let isLs2M = true
-            let isRight = true
-            isNameLegal = suffix === '.pdf'
-            isLs2M = file.size / 1024 / 1024 < 200
-            if (!isLs2M || !isNameLegal) {
-                that.loadingStatus = false
-                this.$Message.error('上传的文件大小不能超过200MB 且 格式为pdf！')
-                isRight = false
-            }
-            that.filename3 = file.name
-            that.file3 = file
-            // 一定要return false 不然会直接上传
-            return isRight
+        handleRemove3(file) {
+            this.$refs.upload3.clearFiles()
         },
         resetForm() {
             let that = this
@@ -595,13 +419,9 @@ export default {
             that.formItem.techFileStoragePath = ''
             that.formItem.cert = ''
             that.formItem.certStoragePath = ''
-            that.uploadStatus1 = false
-            that.uploadStatus2 = false
-            that.uploadStatus3 = false
-            that.file1 = null
-            that.file2 = null
-            that.file3 = null
-
+            this.$refs.upload1.clearFiles()
+            this.$refs.upload2.clearFiles()
+            this.$refs.upload3.clearFiles()
         },
         //提交表单
         submit () {
@@ -734,16 +554,6 @@ export default {
                     this.$Message.error('专利查看失败')
                 }
             )
-        },
-        str2Date(str) {
-            let date = ''
-            if (!str) return date
-            let strArr = str.split('-')
-            let year = strArr[0]
-            let month = strArr[1]
-            let day = strArr[2]
-            date = new Date(year, month, day)
-            return date
         },
         remove(index) {
             let paramId = this.form_list_content[index].id
