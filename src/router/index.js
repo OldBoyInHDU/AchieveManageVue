@@ -105,6 +105,36 @@ export const asyncRoutes = {
         meta: { title: '规章制度' },
         component: () => import('../views/rules/Rules.vue'),
     },
+    indexAward: {
+        path: 'indexAward',
+        name: 'indexAward',
+        meta: { title: '奖励荣誉' },
+        component: () => import('../views/index/IndexAward.vue'),
+    },
+    indexTech: {
+        path: 'indexTech',
+        name: 'indexTech',
+        meta: { title: '科技创新' },
+        component: () => import('../views/index/IndexTech.vue'),
+    },
+    indexCoope: {
+        path: 'indexCoope',
+        name: 'indexCoope',
+        meta: { title: '合作交流' },
+        component: () => import('../views/index/IndexCoope.vue'),
+    },
+    indexPerson: {
+        path: 'indexPerson',
+        name: 'indexPerson',
+        meta: { title: '合作交流' },
+        component: () => import('../views/index/IndexPerson.vue'),
+    },
+    indexBanner: {
+        path: 'indexBanner',
+        name: 'indexBanner',
+        meta: { title: '轮播图' },
+        component: () => import('../views/index/IndexBanner.vue'),
+    },
     t1: {
         path: 't1',
         name: 't1',

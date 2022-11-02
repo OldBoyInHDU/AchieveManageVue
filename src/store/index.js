@@ -16,6 +16,45 @@ const store = new Vuex.Store({
             },
             {
                 size: 18,
+                text: '门户首页设置',
+                type: 'md-settings',
+                children: [
+                    {
+                        size: 18,
+                        type: 'md-images',
+                        name: 'indexBanner',
+                        text: '轮播图',
+                        // hidden 属性 隐藏此菜单 可以通过在地址栏上输入对应的 URL 来显示页面
+                        // hidden: true,
+                    },
+                    {
+                        size: 18, // icon大小
+                        type: 'ios-trophy', // icon类型
+                        name: 'indexAward',
+                        text: '奖励荣誉',
+                    },
+                    {
+                        size: 18, // icon大小
+                        type: 'md-trending-up', // icon类型
+                        name: 'indexTech',
+                        text: '科技创新',
+                    },
+                    {
+                        size: 18, // icon大小
+                        type: 'ios-swap', // icon类型
+                        name: 'indexCoope',
+                        text: '合作交流',
+                    },
+                    {
+                        size: 18, // icon大小
+                        type: 'md-person-add', // icon类型
+                        name: 'indexPerson',
+                        text: '人才培养',
+                    }
+                ],
+            },
+            {
+                size: 18,
                 text: '科技创新',
                 type: 'ios-paper',
                 children: [
