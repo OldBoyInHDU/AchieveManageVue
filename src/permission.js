@@ -9,7 +9,7 @@ let hasMenus = false
 router.beforeEach(async (to, from, next) => {
     document.title = getDocumentTitle(to.meta.title)
     LoadingBar.start()
-    if (localStorage.getItem('token')) {
+    if (sessionStorage.getItem('token')) {
         if (to.path === '/login') {
             next({ path: '/' })
         } else if (hasMenus) {

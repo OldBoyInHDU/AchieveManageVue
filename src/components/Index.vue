@@ -4,7 +4,7 @@
         <aside :class="asideClassName">
             <!-- logo -->
             <div class="logo-c">
-                <img src="../assets/imgs/logo.png" alt="logo" class="logo">
+                <img src="../assets/imgs/logo_toc.png" alt="logo" class="logo">
                 <span v-show="isShowAsideTitle">后台管理系统</span>
             </div>
             <!-- 菜单栏 -->
@@ -89,13 +89,13 @@
                     </div>
                     <div class="h-right">
                         <!-- 消息 -->
-                        <div class="notice-c" @click="info" title="查看新消息">
-                            <div :class="{newMsg: hasNewMsg}"></div>
-                            <Icon type="ios-notifications-outline" />
-                        </div>
+<!--                        <div class="notice-c" @click="info" title="查看新消息">-->
+<!--                            <div :class="{newMsg: hasNewMsg}"></div>-->
+<!--                            <Icon type="ios-notifications-outline" />-->
+<!--                        </div>-->
                         <!-- 用户头像 -->
                         <div class="user-img-c">
-                            <img :src="userImg">
+                            <img src="../../public/logo_toc.png">
                         </div>
                         <!-- 下拉菜单 -->
                         <Dropdown trigger="click" @on-click="userOperate" @on-visible-change="showArrow">
@@ -106,8 +106,8 @@
                             </div>
                             <DropdownMenu slot="list">
                                 <!-- name标识符 -->
-                                <DropdownItem name="1">修改密码</DropdownItem>
-                                <DropdownItem name="2">基本资料</DropdownItem>
+<!--                                <DropdownItem name="1">修改密码</DropdownItem>-->
+<!--                                <DropdownItem name="2">基本资料</DropdownItem>-->
                                 <DropdownItem divided  name="3">退出登陆</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
@@ -204,8 +204,8 @@ export default {
         })
 
         // 设置用户信息
-        this.userName = localStorage.getItem('userName')
-        this.userImg = localStorage.getItem('userImg')
+        this.userName = sessionStorage.getItem('userName')
+        this.userImg = sessionStorage.getItem('userImg')
 
         this.main = document.querySelector('.sec-right')
         this.asideArrowIcons = document.querySelectorAll('aside .ivu-icon-ios-arrow-down')

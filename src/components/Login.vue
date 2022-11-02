@@ -18,12 +18,14 @@
 </template>
 
 <script>
+import request from "@/utils/request";
+
 export default {
     name: 'login',
     data() {
         return {
-            account: 'admin',
-            pwd: 'admin',
+            account: '',
+            pwd: '',
             accountError: '',
             pwdError: '',
             isShowLoading: false,
@@ -31,7 +33,7 @@ export default {
         }
     },
     created() {
-        this.bg.backgroundImage = 'url(' + require('../assets/imgs/bg0' + new Date().getDay() + '.jpg') + ')'
+        this.bg.backgroundImage = 'url(' + require('../assets/imgs/bg.jpg') + ')'
     },
     watch: {
         $route: {
@@ -43,15 +45,15 @@ export default {
     },
     methods: {
         verifyAccount() {
-            if (this.account !== 'admin') {
-                this.accountError = '账号为admin'
+            if (this.account === '') {
+                this.accountError = '请输入账号'
             } else {
                 this.accountError = ''
             }
         },
         verifyPwd() {
-            if (this.pwd !== 'admin') {
-                this.pwdError = '密码为admin'
+            if (this.pwd === '') {
+                this.pwdError = '请输入密码'
             } else {
                 this.pwdError = ''
             }
@@ -63,23 +65,38 @@ export default {
 
         },
         submit() {
-            if (this.account === 'admin' && this.pwd === 'admin') {
-                this.isShowLoading = true
-                // 登陆成功 设置用户信息
-                localStorage.setItem('userImg', 'https://avatars3.githubusercontent.com/u/22117876?s=460&v=4')
-                localStorage.setItem('userName', '小明')
-                // 登陆成功 假设这里是后台返回的 token
-                localStorage.setItem('token', 'i_am_token')
-                this.$router.push({ path: this.redirect || '/' })
-            } else {
-                if (this.account !== 'admin') {
-                    this.accountError = '账号为admin'
-                }
+            let formData = new FormData()
+            formData.append('account', this.account)
+            formData.append('password', this.pwd)
+            request.post(
+                '/login',
+                formData
+            ).then(
+                res => {
+                    if (res.code === 200) {
+                        this.isShowLoading = true
+                        // 登陆成功 设置用户信息
+                        sessionStorage.setItem('userImg', 'userImg')
+                        sessionStorage.setItem('userName', res.data.username)
+                        // 登陆成功 假设这里是后台返回的 token
+                        sessionStorage.setItem('token', 'i_am_token')
+                        this.$router.push({ path: this.redirect || '/' })
+                    } else {
+                        if (this.account !== 'admin') {
+                            this.accountError = '账号为admin'
+                        }
 
-                if (this.pwd !== 'admin') {
-                    this.pwdError = '密码为admin'
+                        if (this.pwd !== 'admin') {
+                            this.pwdError = '密码为admin'
+                        }
+                    }
                 }
-            }
+            ).catch(
+                err => {
+                    this.$Message.error(err.data)
+                }
+            )
+
         },
     },
 }
@@ -94,7 +111,7 @@ export default {
     color: #fff;
 }
 .login-vue .container {
-    background: rgba(255, 255, 255, .5);
+    background: rgba(2, 93, 84, 0.8);
     width: 300px;
     text-align: center;
     border-radius: 10px;
