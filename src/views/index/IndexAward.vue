@@ -219,9 +219,9 @@ export default {
         },
         submit() {
             let that = this
-            //判断必填项 规章荣誉类别 是否为空
-            if(that.formItem.type === '' && that.formItem.type === null) {
-                this.$Message.error('请选择荣誉类别！')
+            //判断必填项 图片 是否为空
+            if(that.formItem.imgStoragePath === '' && that.formItem.imgStoragePath === null) {
+                this.$Message.error('图片未上传！请上传图片！')
                 return
             }
             let formData = new FormData()
