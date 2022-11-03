@@ -96,7 +96,7 @@
 import request from "@/utils/request";
 
 export default {
-    name: 'studio',
+    name: 'indexAward',
     data() {
         return {
             //查询loading
