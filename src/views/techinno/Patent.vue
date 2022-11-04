@@ -136,15 +136,15 @@
                     </FormItem>
                     <divider orientation="center">附件下载</divider>
                     <FormItem label="专利申请表" >
-                        <Input v-model="resultItem.appStoragePath" placeholder="专利申请表" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.application" placeholder="专利申请表" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.appStoragePath)" >预览</Button>
                     </FormItem>
                     <FormItem label="技术交底书" >
-                        <Input v-model="resultItem.techFileStoragePath" placeholder="技术交底书" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.techFile" placeholder="技术交底书" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.techFileStoragePath)" >预览</Button>
                     </FormItem>
                     <FormItem label="证书扫描件" >
-                        <Input v-model="resultItem.certStoragePath" placeholder="证书扫描件" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.cert" placeholder="证书扫描件" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.certStoragePath)" >预览</Button>
                     </FormItem>
                 </Form>
@@ -507,6 +507,9 @@ export default {
                     that.resultItem.project = res.data.project
                     that.resultItem.statusDate = res.data.statusDate
                     that.resultItem.status = res.data.status
+                    that.resultItem.application = res.data.application
+                    that.resultItem.techFile = res.data.techFile
+                    that.resultItem.cert = res.data.cert
                     that.resultItem.appStoragePath = res.data.appStoragePath
                     that.resultItem.techFileStoragePath = res.data.techFileStoragePath
                     that.resultItem.certStoragePath = res.data.certStoragePath

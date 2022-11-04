@@ -153,23 +153,23 @@
                     </FormItem>
                     <divider orientation="center">附件下载</divider>
                     <FormItem label="投稿审批单" >
-                        <Input v-model="resultItem.approvalStoragePath" placeholder="投稿审批单" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.approval" placeholder="投稿审批单" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.approvalStoragePath)" >预览</Button>
                     </FormItem>
                     <FormItem label="投稿论文(中)" >
-                        <Input v-model="resultItem.paperChnStoragePath" placeholder="投稿论文(中)" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.paperChn" placeholder="投稿论文(中)" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.paperChnStoragePath)" >预览</Button>
                     </FormItem>
                     <FormItem label="投稿论文(英)" >
-                        <Input v-model="resultItem.paperEngStoragePath" placeholder="投稿论文(英)" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.paperEng" placeholder="投稿论文(英)" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.paperEngStoragePath)" >预览</Button>
                     </FormItem>
                     <FormItem label="证书扫描件" >
-                        <Input v-model="resultItem.scanFileStoragePath" placeholder="证书扫描件" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.scanFile" placeholder="证书扫描件" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.scanFileStoragePath)" >预览</Button>
                     </FormItem>
                     <FormItem label="检索证明" >
-                        <Input v-model="resultItem.searchProofStoragePath" placeholder="检索证明" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.searchProof" placeholder="检索证明" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.searchProofStoragePath)" >预览</Button>
                     </FormItem>
                 </Form>

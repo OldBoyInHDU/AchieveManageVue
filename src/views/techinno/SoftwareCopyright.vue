@@ -133,19 +133,19 @@
                     </FormItem>
                     <divider orientation="center">附件下载</divider>
                     <FormItem label="登记申请表" >
-                        <Input v-model="resultItem.appStoragePath" placeholder="登记申请表" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.application" placeholder="登记申请表" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.appStoragePath)" >预览</Button>
                     </FormItem>
                     <FormItem label="操作说明书" >
-                        <Input v-model="resultItem.manualStoragePath" placeholder="操作说明书" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.manual" placeholder="操作说明书" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.manualStoragePath)" >预览</Button>
                     </FormItem>
                     <FormItem label="软件源码" >
-                        <Input v-model="resultItem.codesStoragePath" placeholder="软件源码" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.codes" placeholder="软件源码" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.codesStoragePath)" >预览</Button>
                     </FormItem>
                     <FormItem label="软著扫描件" >
-                        <Input v-model="resultItem.scanFileStoragePath" placeholder="软著扫描件" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.scanFile" placeholder="软著扫描件" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.scanFileStoragePath)" >预览</Button>
                     </FormItem>
                 </Form>
