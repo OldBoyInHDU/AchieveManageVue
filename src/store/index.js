@@ -54,6 +54,27 @@ const store = new Vuex.Store({
                 ],
             },
             {
+                size: 18, // icon大小
+                type: 'md-podium', // icon类型
+                text: '工作室设置', //
+                children: [
+                    {
+                        size: 18,
+                        type: 'ios-home',
+                        name: 'studio',
+                        text: '工作室/领班人简介',
+                        // hidden 属性 隐藏此菜单 可以通过在地址栏上输入对应的 URL 来显示页面
+                        // hidden: true,
+                    },
+                    {
+                        size: 18, // icon大小
+                        type: 'ios-people', // icon类型
+                        name: 'member',
+                        text: '成员管理',
+                    },
+                ]
+            },
+            {
                 size: 18,
                 text: '科技创新',
                 type: 'ios-paper',
@@ -99,6 +120,12 @@ const store = new Vuex.Store({
                 ],
             },
             {
+                name: 'rules', // 要跳转的路由名称 不是路径
+                size: 18, // icon大小
+                type: 'md-clipboard', // icon类型
+                text: '规章制度', //
+            },
+            {
                 name: 'award', // 要跳转的路由名称 不是路径
                 size: 18, // icon大小
                 type: 'md-trophy', // icon类型
@@ -115,33 +142,6 @@ const store = new Vuex.Store({
                 size: 18, // icon大小
                 type: 'md-swap', // icon类型
                 text: '合作交流', //
-            },
-            {
-                size: 18, // icon大小
-                type: 'md-podium', // icon类型
-                text: '工作室设置', //
-                children: [
-                    {
-                        size: 18,
-                        type: 'ios-home',
-                        name: 'studio',
-                        text: '工作室/领班人简介',
-                        // hidden 属性 隐藏此菜单 可以通过在地址栏上输入对应的 URL 来显示页面
-                        // hidden: true,
-                    },
-                    {
-                        size: 18, // icon大小
-                        type: 'ios-people', // icon类型
-                        name: 'member',
-                        text: '成员管理',
-                    },
-                ]
-            },
-            {
-                name: 'rules', // 要跳转的路由名称 不是路径
-                size: 18, // icon大小
-                type: 'md-clipboard', // icon类型
-                text: '规章制度', //
             },
 /*            {
                 name: 'other', // 要跳转的路由名称 不是路径
