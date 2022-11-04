@@ -12,7 +12,7 @@
                 <p class="error">{{pwdError}}</p>
             </div>
             <Button :loading="isShowLoading" class="submit" type="primary" @click="submit">登陆</Button>
-            <p class="account"><span @click="register">注册账号</span> | <span @click="forgetPwd">忘记密码</span></p>
+<!--            <p class="account"><span @click="register">注册账号</span> | <span @click="forgetPwd">忘记密码</span></p>-->
         </div>
     </div>
 </template>
@@ -65,6 +65,15 @@ export default {
 
         },
         submit() {
+/*            if (this.account === 'admin' && this.pwd === 'admin') {
+                this.isShowLoading = true
+                // 登陆成功 设置用户信息
+                sessionStorage.setItem('userImg', 'userImg')
+                sessionStorage.setItem('userName', 'admin')
+                // 登陆成功 假设这里是后台返回的 token
+                sessionStorage.setItem('token', 'i_am_token')
+                this.$router.push({path: this.redirect || '/'})
+            }*/
             let formData = new FormData()
             formData.append('account', this.account)
             formData.append('password', this.pwd)
@@ -82,13 +91,7 @@ export default {
                         sessionStorage.setItem('token', 'i_am_token')
                         this.$router.push({ path: this.redirect || '/' })
                     } else {
-                        if (this.account !== 'admin') {
-                            this.accountError = '账号为admin'
-                        }
-
-                        if (this.pwd !== 'admin') {
-                            this.pwdError = '密码为admin'
-                        }
+                        this.$Message.error('账号密码错误！')
                     }
                 }
             ).catch(
