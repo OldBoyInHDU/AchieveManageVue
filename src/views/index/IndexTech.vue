@@ -4,7 +4,7 @@
             <Button type="success" icon="md-cloud-upload" @click="register">科技创新上传</Button>
             <Button type="primary" style="margin-left: 20px" @click="search">科技创新查询</Button>
         </div>
-        <Divider style="padding-top: 20px">科技创新列表</Divider>
+        <Divider style="padding-top: 20px">科技创新列表(保证4-6条数据)</Divider>
         <div class="table">
             <!--            科技创新登记modal-->
             <Modal
@@ -19,9 +19,17 @@
                         <Input v-model="formItem.project" placeholder="请输入科技创新名称" ></Input>
                     </FormItem>
                     <FormItem label="科技创新摘要" required>
-                        <Input v-model="formItem.content" type="textarea" rows="4" placeholder="请输入科技创新摘要" />
+                        <Input v-model="formItem.content" type="textarea" :rows="rows" placeholder="请输入科技创新摘要" />
                     </FormItem>
-                    <divider orientation="center">附件上传</divider>
+                    <FormItem label="科技创新类型" required>
+                        <Select v-model="formItem.type" clearable>
+                            <Option v-for="item in typeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        </Select>
+                    </FormItem>
+                    <FormItem label="年度" required>
+                        <DatePicker type="year" format="yyyy" placement="bottom-end" placeholder="选择年度" :value="formItem.statusDate" @on-change="statusDateChange" ></DatePicker>
+                    </FormItem>
+<!--                    <divider orientation="center">附件上传</divider>
                     <FormItem label="图片" required>
                         <Upload
                             ref="upload"
@@ -33,9 +41,9 @@
                             accept="['image/jpg','image/jpeg','image/png']"
                             action="http://localhost:8080/achieve/uploadImg">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
-                            <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
+                            &lt;!&ndash;                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>&ndash;&gt;
                         </Upload>
-                    </FormItem>
+                    </FormItem>-->
                 </Form>
             </Modal>
             <!--            查看modal-->
@@ -48,16 +56,24 @@
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">
                     <FormItem label="科技创新名称" required>
-                        <Input v-model="resultItem.project" placeholder="请输入科技创新名称" ></Input>
+                        <Input v-model="resultItem.project" placeholder="请输入科技创新名称" readonly></Input>
                     </FormItem>
                     <FormItem label="科技创新摘要" required>
-                        <Input v-model="resultItem.content" type="textarea" rows="4" placeholder="请输入科技创新摘要" />
+                        <Input v-model="resultItem.content" type="textarea" :rows="rows" placeholder="请输入科技创新摘要" readonly/>
                     </FormItem>
-                    <divider orientation="center">附件查看</divider>
+                    <FormItem label="科技创新类型" required>
+                        <Select v-model="resultItem.type" >
+                            <Option v-for="item in typeList" :value="item.value" :key="item.value" disabled>{{ item.label }}</Option>
+                        </Select>
+                    </FormItem>
+                    <FormItem label="年度" required>
+                        <DatePicker type="year" format="yyyy" placement="bottom-end" placeholder="选择年度" :value="resultItem.statusDate" @on-change="statusDateChange" readonly></DatePicker>
+                    </FormItem>
+<!--                    <divider orientation="center">附件查看</divider>
                     <FormItem label="科技创新图片" >
                         <Input v-model="resultItem.imgStoragePath" placeholder="摘要" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.imgStoragePath)" >预览</Button>
-                    </FormItem>
+                    </FormItem>-->
                 </Form>
             </Modal>
             <div class="table-result" style="padding-top: 20px">
@@ -87,6 +103,33 @@ export default {
     name: 'indexTech',
     data() {
         return {
+            typeList: [
+                {
+                    value: '科技项目',
+                    label: '科技项目'
+                },
+                {
+                    value: '技能创新',
+                    label: '技能创新'
+                },
+                {
+                    value: '质量改进',
+                    label: '质量改进'
+                },
+                {
+                    value: '论文',
+                    label: '论文'
+                },
+                {
+                    value: '专利',
+                    label: '专利'
+                },
+                {
+                    value: '软件著作权',
+                    label: '软件著作权'
+                },
+            ],
+            rows: 4,
             //查询loading
             loading: false,
             //弹出框 Modal条件
@@ -97,14 +140,16 @@ export default {
                 id: -1,
                 project: '',
                 content: '',
-                imgName: '',
-                imgStoragePath: ''
+                statusDate: '',
+                type: '',
+                // imgName: '',
+                // imgStoragePath: ''
             },
             resultItem: {
                 project: '',
                 content: '',
-                imgName: '',
-                imgStoragePath: ''
+                // imgName: '',
+                // imgStoragePath: ''
             },
             form_header: [
                 {
@@ -123,12 +168,12 @@ export default {
                     key: 'content',
                 },
                 {
-                    title: '图片名称',
-                    key: 'imgName',
+                    title: '科技创新类型',
+                    key: 'type',
                 },
                 {
-                    title: '图片存储路径',
-                    key: 'imgStoragePath',
+                    title: '年度',
+                    key: 'statusDate',
                 },
                 {
                     title: '更新时间',
@@ -196,8 +241,8 @@ export default {
         submit() {
             let that = this
             //判断必填项 图片 是否为空
-            if(that.formItem.imgStoragePath === '' && that.formItem.imgStoragePath === null) {
-                this.$Message.error('图片未上传！请上传图片！')
+            if(that.formItem.project === '' && that.formItem.project === null) {
+                this.$Message.error('项目名称为空！请输入项目名称')
                 return
             }
             let formData = new FormData()
@@ -206,8 +251,8 @@ export default {
             }
             formData.append('project', that.formItem.project)
             formData.append('content', that.formItem.content)
-            formData.append('imgName', that.formItem.imgName)
-            formData.append('imgStoragePath', that.formItem.imgStoragePath)
+            formData.append('type', that.formItem.type)
+            formData.append('statusDate', that.formItem.statusDate)
 
             request.post(
                 '/index/submitTechInfo',
@@ -235,9 +280,11 @@ export default {
             that.formItem.id = -1
             that.formItem.project = ''
             that.formItem.content = ''
-            that.formItem.imgName = ''
-            that.formItem.imgStoragePath = ''
-            this.$refs.upload.clearFiles()
+            that.formItem.type = ''
+            that.formItem.statusDate = ''
+            // that.formItem.imgName = ''
+            // that.formItem.imgStoragePath = ''
+            // this.$refs.upload.clearFiles()
         },
         ok() {
 
@@ -274,8 +321,10 @@ export default {
                     console.log(res)
                     that.resultItem.project = res.data.project
                     that.resultItem.content = res.data.content
-                    that.resultItem.imgName = res.data.imgName
-                    that.resultItem.imgStoragePath = res.data.imgStoragePath
+                    that.resultItem.type = res.data.type
+                    that.resultItem.statusDate = res.data.statusDate
+                    // that.resultItem.imgName = res.data.imgName
+                    // that.resultItem.imgStoragePath = res.data.imgStoragePath
                 }
             ).catch(
                 err => {
@@ -304,8 +353,10 @@ export default {
                     that.formItem.id = res.data.id
                     that.formItem.project = res.data.project
                     that.formItem.content = res.data.content
-                    that.formItem.imgName = res.data.imgName
-                    that.formItem.imgStoragePath = res.data.imgStoragePath
+                    that.formItem.type = res.data.type
+                    that.formItem.statusDate = res.data.statusDate
+                    // that.formItem.imgName = res.data.imgName
+                    // that.formItem.imgStoragePath = res.data.imgStoragePath
                 }
             ).catch(
                 err => {
