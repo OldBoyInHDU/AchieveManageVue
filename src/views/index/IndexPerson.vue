@@ -4,7 +4,7 @@
             <Button type="success" icon="md-cloud-upload" @click="register">资讯上传</Button>
             <Button type="primary" style="margin-left: 20px" @click="search">资讯查询</Button>
         </div>
-        <Divider style="padding-top: 20px">人才培养列表</Divider>
+        <Divider style="padding-top: 20px">人才培养列表(保证3条数据)</Divider>
         <div class="table">
             <!--            人才培养登记modal-->
             <Modal

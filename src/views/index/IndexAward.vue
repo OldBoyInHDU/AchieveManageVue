@@ -4,7 +4,7 @@
             <Button type="success" icon="md-cloud-upload" @click="register">荣誉上传</Button>
             <Button type="primary" style="margin-left: 20px" @click="search">荣誉查询</Button>
         </div>
-        <Divider style="padding-top: 20px">荣誉列表</Divider>
+        <Divider style="padding-top: 20px">荣誉列表(保证5条数据)</Divider>
         <div class="table">
             <!--            荣誉登记modal-->
             <Modal

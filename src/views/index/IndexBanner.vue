@@ -1,10 +1,10 @@
 <template>
     <div class="container" style="margin: 20px">
         <div class="search">
-            <Button type="success" icon="md-cloud-upload" @click="register">轮播图上传</Button>
+            <Button type="success" icon="md-cloud-upload" @click="register" >轮播图上传</Button>
             <Button type="primary" style="margin-left: 20px" @click="search">轮播图查询</Button>
         </div>
-        <Divider style="padding-top: 20px">轮播图列表</Divider>
+        <Divider style="padding-top: 20px">轮播图列表(保证3条数据)</Divider>
         <div class="table">
             <!--            轮播图上传modal-->
             <Modal
@@ -40,6 +40,7 @@
                     </template>
                     <template slot-scope="{ row, index }" slot="action">
                         <Button type="primary" size="small" style="margin-right: 5px" @click="show(index)">查看</Button>
+<!--                        <Button type="warning" size="small" style="margin-right: 5px" @click="modify(index)">修改</Button>-->
                         <Button type="error" size="small" @click="remove(index)">删除</Button>
                     </template>
                 </Table>
@@ -212,6 +213,38 @@ export default {
                 // window.open('http://localhost:8080/achieve/filestore/' + storagePath, '_blank')
                 window.open(storagePath, '_blank')
             }
+        },
+        modify(index) {
+            let that = this
+            that.registerModal = true
+            let paramId = that.form_list_content[index].id
+            request.get(
+                '/index/getBannerById',
+                {
+                    headers: {
+                        'content-type': 'application/json;charset=UTF-8',
+                    },
+                    params: {
+                        id: paramId
+                    },
+                }
+            ).then(
+                res => {
+                    console.log(res)
+                    that.formItem.id = res.data.id
+                    that.formItem.project = res.data.project
+                    that.formItem.awardee = res.data.awardee
+                    that.formItem.statusDate = res.data.statusDate
+                    that.formItem.award = res.data.award
+                    that.formItem.imgName = res.data.imgName
+                    that.formItem.imgStoragePath = res.data.imgStoragePath
+                }
+            ).catch(
+                err => {
+                    console.log(err)
+                    this.$Message.error('荣誉查看失败')
+                }
+            )
         },
         remove(index) {
             let paramId = this.form_list_content[index].id
