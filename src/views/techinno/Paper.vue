@@ -146,9 +146,9 @@
                         (投稿/发表 日期)
                     </FormItem>
                     <FormItem label="申报状态" >
-                        <RadioGroup v-model="resultItem.status" type="button" disabled>
-                            <Radio label="投稿">投稿</Radio>
-                            <Radio label="发表">发表</Radio>
+                        <RadioGroup v-model="resultItem.status" type="button" >
+                            <Radio label="投稿" disabled>投稿</Radio>
+                            <Radio label="发表" disabled>发表</Radio>
                         </RadioGroup>
                     </FormItem>
                     <divider orientation="center">附件下载</divider>

@@ -102,7 +102,7 @@
                         <Input v-model="resultItem.project" placeholder="请输入项目名称" readonly></Input>
                     </FormItem>
                     <FormItem label="项目类型" required>
-                        <Select v-model="resultItem.type" placeholder="项目类型" readonly>
+                        <Select v-model="resultItem.type" placeholder="项目类型" disabled>
                             <Option v-for="item in typeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                         </Select>
                     </FormItem>
@@ -113,7 +113,7 @@
                         <Input v-model="resultItem.member" placeholder="请输入主要完成人" readonly></Input>
                     </FormItem>
                     <FormItem label="项目状态" >
-                        <Select v-model="resultItem.status" placeholder="项目状态" clearable>
+                        <Select v-model="resultItem.status" placeholder="项目状态" disabled>
                             <Option v-for="item in statusList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                         </Select>
                     </FormItem>

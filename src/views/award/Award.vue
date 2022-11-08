@@ -97,33 +97,33 @@
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">
                     <FormItem label="荣誉类别" required>
-                        <Select v-model="resultItem.type" placeholder="请输入荣誉类别" clearable>
+                        <Select v-model="resultItem.type" placeholder="请输入荣誉类别" disabled>
                             <Option v-for="item in typeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                         </Select>
                     </FormItem>
                     <FormItem label="荣誉等级" required>
-                        <Select v-model="resultItem.level" placeholder="请输入荣誉等级" clearable>
+                        <Select v-model="resultItem.level" placeholder="请输入荣誉等级" disabled>
                             <Option v-for="item in levelList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                         </Select>
                     </FormItem>
                     <FormItem label="企业内外" required>
                         <RadioGroup v-model="resultItem.sort" type="button">
-                            <Radio label="企业内">企业内</Radio>
-                            <Radio label="企业外">企业外</Radio>
+                            <Radio label="企业内" disabled>企业内</Radio>
+                            <Radio label="企业外" disabled>企业外</Radio>
                         </RadioGroup>
                     </FormItem>
                     <FormItem label="获奖人/荣誉" required>
-                        <Input v-model="resultItem.awardee" placeholder="请输入获奖人/荣誉" ></Input>
+                        <Input v-model="resultItem.awardee" placeholder="请输入获奖人/荣誉" readonly></Input>
                     </FormItem>
                     <FormItem label="荣誉名称" required>
-                        <Input v-model="resultItem.award" placeholder="请输入荣誉名称" ></Input>
+                        <Input v-model="resultItem.award" placeholder="请输入荣誉名称" readonly></Input>
                     </FormItem>
                     <FormItem label="年度">
-                        <DatePicker type="year" format="yyyy" placement="bottom-end" placeholder="选择年度" :value="resultItem.statusDate" @on-change="statusDateChange" ></DatePicker>
+                        <DatePicker type="year" format="yyyy" placement="bottom-end" placeholder="选择年度" :value="resultItem.statusDate" @on-change="statusDateChange" disabled=""></DatePicker>
                     </FormItem>
                     <divider orientation="center">附件列表</divider>
                     <FormItem label="荣誉证书" >
-                        <Input v-model="resultItem.certStoragePath" placeholder="荣誉证书" style="width: 200px; padding-right: 20px" readonly></Input>
+                        <Input v-model="resultItem.cert" placeholder="荣誉证书" style="width: 200px; padding-right: 20px" readonly></Input>
                         <Button type="primary" ghost @click="downloadDoc(resultItem.certStoragePath)" >预览</Button>
                     </FormItem>
                 </Form>
@@ -159,8 +159,8 @@ export default {
                     label: '集体荣誉'
                 },
                 {
-                    value: '荣誉荣誉',
-                    label: '荣誉荣誉'
+                    value: '项目荣誉',
+                    label: '项目荣誉'
                 },
                 {
                     value: '其他',
