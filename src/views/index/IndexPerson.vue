@@ -46,7 +46,7 @@
                 v-model="showModal"
                 title="人才培养查看"
                 width="520"
-                ok-text="提交"
+                ok-text="确定"
                 @on-ok="ok"
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">

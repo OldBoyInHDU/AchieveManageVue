@@ -49,21 +49,21 @@
                 v-model="showModal"
                 title="荣誉查看"
                 width="520"
-                ok-text="提交"
+                ok-text="确定"
                 @on-ok="ok"
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">
                     <FormItem label="项目名称" required>
-                        <Input v-model="resultItem.project" placeholder="请输入项目名称" ></Input>
+                        <Input v-model="resultItem.project" placeholder="请输入项目名称" readonly></Input>
                     </FormItem>
                     <FormItem label="获奖人" required>
-                        <Input v-model="resultItem.awardee" placeholder="请输入获奖人" ></Input>
+                        <Input v-model="resultItem.awardee" placeholder="请输入获奖人" readonly></Input>
                     </FormItem>
                     <FormItem label="获奖时间" required>
-                        <DatePicker type="date" format="yyyy-MM-dd" placement="bottom-end" placeholder="选择获奖时间" :value="resultItem.statusDate" @on-change="statusDateChange" ></DatePicker>
+                        <DatePicker type="date" format="yyyy-MM-dd" placement="bottom-end" placeholder="选择获奖时间" :value="resultItem.statusDate" @on-change="statusDateChange" readonly></DatePicker>
                     </FormItem>
                     <FormItem label="荣誉奖项" required>
-                        <Input v-model="resultItem.award" placeholder="请输入荣誉奖项" ></Input>
+                        <Input v-model="resultItem.award" placeholder="请输入荣誉奖项" readonly></Input>
                     </FormItem>
                     <divider orientation="center">附件查看</divider>
                     <FormItem label="荣誉图片" >

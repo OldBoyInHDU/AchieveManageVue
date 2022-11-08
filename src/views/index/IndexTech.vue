@@ -51,7 +51,7 @@
                 v-model="showModal"
                 title="科技创新查看"
                 width="520"
-                ok-text="提交"
+                ok-text="确定"
                 @on-ok="ok"
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">
@@ -62,8 +62,8 @@
                         <Input v-model="resultItem.content" type="textarea" :rows="rows" placeholder="请输入科技创新摘要" readonly/>
                     </FormItem>
                     <FormItem label="科技创新类型" required>
-                        <Select v-model="resultItem.type" >
-                            <Option v-for="item in typeList" :value="item.value" :key="item.value" disabled>{{ item.label }}</Option>
+                        <Select v-model="resultItem.type" disabled>
+                            <Option v-for="item in typeList" :value="item.value" :key="item.value" >{{ item.label }}</Option>
                         </Select>
                     </FormItem>
                     <FormItem label="年度" required>

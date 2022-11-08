@@ -119,8 +119,8 @@
                     </FormItem>
                     <FormItem label="性别" required>
                         <RadioGroup v-model="resultItem.gender" type="button">
-                            <Radio label="男">男</Radio>
-                            <Radio label="女">女</Radio>
+                            <Radio label="男" disabled>男</Radio>
+                            <Radio label="女" disabled>女</Radio>
                         </RadioGroup>
                     </FormItem>
                     <FormItem label="出生年月">
@@ -159,9 +159,9 @@
                     </FormItem>
                     <FormItem label="等级" required>
                         <RadioGroup v-model="resultItem.techLevel" type="button">
-                            <Radio label="初级">初级</Radio>
-                            <Radio label="中级">中级</Radio>
-                            <Radio label="高级">高级</Radio>
+                            <Radio label="初级" disabled>初级</Radio>
+                            <Radio label="中级" disabled>中级</Radio>
+                            <Radio label="高级" disabled>高级</Radio>
                         </RadioGroup>
                     </FormItem>
                 </Form>
