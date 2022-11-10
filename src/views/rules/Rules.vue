@@ -16,7 +16,7 @@
                 v-model="registerModal"
                 title="制度上传"
                 width="520"
-                ok-text="确定"
+                ok-text="提交"
                 @on-ok="submit"
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="formItem" :label-width="120">
@@ -47,7 +47,7 @@
                 v-model="showModal"
                 title="制度查看"
                 width="520"
-                ok-text="提交"
+                ok-text="确定"
                 @on-ok="ok"
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">
