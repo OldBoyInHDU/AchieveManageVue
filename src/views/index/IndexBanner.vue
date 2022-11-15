@@ -26,7 +26,7 @@
                             :on-remove="handleRemove"
                             multiple
                             accept="['image/jpg','image/jpeg','image/png']"
-                            action="http://localhost:8080/achieve/uploadImg">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传图片</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -60,6 +60,7 @@ export default {
     name: 'indexBanner',
     data() {
         return {
+            actionURL: '', //http://localhost:8080/achieve/uploadImg
             //查询loading
             loading: false,
             //弹出框 Modal条件
@@ -279,6 +280,11 @@ export default {
             )
         },
     },
+    mounted() {
+        //http://localhost:8080/achieve/uploadImg
+        this.actionURL = this.api.BaseURL + 'uploadImg'
+        // console.log(this.actionURL)
+    }
 }
 </script>
 

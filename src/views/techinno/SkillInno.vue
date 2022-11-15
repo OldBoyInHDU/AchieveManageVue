@@ -82,7 +82,7 @@
                             :on-remove="handleRemove"
                             multiple
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/siUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -156,6 +156,7 @@ export default {
     name: 'skillInno',
     data() {
         return {
+            actionURL: '', //http://localhost:8080/achieve/techInno/siUpload
             typeList: [
                 {
                     value: '生产设备操作',
@@ -550,6 +551,11 @@ export default {
             )
         },
     },
+    mounted() {
+        //http://localhost:8080/achieve/techInno/siUpload
+        this.actionURL = this.api.BaseURL + 'techInno/siUpload'
+        // console.log(this.actionURL)
+    }
 }
 </script>
 

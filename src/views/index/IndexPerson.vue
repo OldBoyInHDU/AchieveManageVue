@@ -19,7 +19,7 @@
                         <Input v-model="formItem.title" placeholder="请输入资讯标题" ></Input>
                     </FormItem>
                     <FormItem label="资讯内容" required>
-                        <Input v-model="formItem.content" type="textarea" rows="4" placeholder="请输入资讯内容" />
+                        <Input v-model="formItem.content" type="textarea" :rows="rows" placeholder="请输入资讯内容" />
                     </FormItem>
                     <FormItem label="资讯日期" required>
                         <DatePicker type="date" format="yyyy-MM-dd" placement="bottom-end" placeholder="选择资讯日期" :value="formItem.statusDate" @on-change="statusDateChange" ></DatePicker>
@@ -34,7 +34,7 @@
                             :on-success="handleSuccess"
                             :on-remove="handleRemove"
                             accept="['image/jpg','image/jpeg','image/png']"
-                            action="http://localhost:8080/achieve/uploadImg">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -54,7 +54,7 @@
                         <Input v-model="resultItem.title" placeholder="资讯标题" readonly></Input>
                     </FormItem>
                     <FormItem label="资讯内容" required>
-                        <Input v-model="resultItem.content" type="textarea" rows="4" placeholder="资讯内容" readonly/>
+                        <Input v-model="resultItem.content" type="textarea" :rows="rows" placeholder="资讯内容" readonly/>
                     </FormItem>
                     <FormItem label="资讯日期" required>
                         <DatePicker type="date" format="yyyy-MM-dd" placement="bottom-end" placeholder="资讯日期" :value="resultItem.statusDate" @on-change="statusDateChange" readonly></DatePicker>
@@ -93,6 +93,8 @@ export default {
     name: 'indexPerson',
     data() {
         return {
+            rows: 4,
+            actionURL: '', //http://localhost:8080/achieve/uploadImg
             //查询loading
             loading: false,
             //弹出框 Modal条件
@@ -364,6 +366,11 @@ export default {
             )
         },
     },
+    mounted() {
+        //http://localhost:8080/achieve/uploadImg
+        this.actionURL = this.api.BaseURL + 'uploadImg'
+        // console.log(this.actionURL)
+    }
 }
 </script>
 

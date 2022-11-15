@@ -53,7 +53,7 @@
                             :on-success="handleSuccess1"
                             :on-remove="handleRemove1"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/rightUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -67,7 +67,7 @@
                             :on-success="handleSuccess2"
                             :on-remove="handleRemove2"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/rightUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -81,7 +81,7 @@
                             :on-success="handleSuccess3"
                             :on-remove="handleRemove3"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/rightUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -95,14 +95,13 @@
                             :on-success="handleSuccess4"
                             :on-remove="handleRemove4"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/rightUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
                     </FormItem>
                 </Form>
             </Modal>
-
             <!--            查看modal-->
             <Modal
                 v-model="showModal"
@@ -177,6 +176,7 @@ export default {
     name: 'softwareCopyright',
     data() {
         return {
+            actionURL: '', // http://localhost:8080/achieve/techInno/rightUpload
             statusList: [
                 {
                     value: '申报',
@@ -582,6 +582,11 @@ export default {
             )
         },
     },
+    mounted() {
+        //http://localhost:8080/achieve/techInno/rightUpload
+        this.actionURL = this.api.BaseURL + 'techInno/rightUpload'
+        // console.log(this.actionURL)
+    }
 }
 </script>
 

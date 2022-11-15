@@ -56,7 +56,7 @@
                             :on-success="handleSuccess1"
                             :on-remove="handleRemove1"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/paperUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
 <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -70,7 +70,7 @@
                             :on-success="handleSuccess2"
                             :on-remove="handleRemove2"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/paperUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -84,7 +84,7 @@
                             :on-success="handleSuccess3"
                             :on-remove="handleRemove3"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/paperUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -98,7 +98,7 @@
                             :on-success="handleSuccess4"
                             :on-remove="handleRemove4"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/paperUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -112,7 +112,7 @@
                             :on-success="handleSuccess5"
                             :on-remove="handleRemove5"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/paperUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -201,6 +201,7 @@ export default {
     name: 'paper',
     data() {
         return {
+            actionURL: '', // http://localhost:8080/achieve/techInno/paperUpload
             statusList: [
                 {
                     value: '投稿',
@@ -642,6 +643,11 @@ export default {
             )
         },
     },
+    mounted() {
+        //http://localhost:8080/achieve/techInno/paperUpload
+        this.actionURL = this.api.BaseURL + 'techInno/paperUpload'
+        // console.log(this.actionURL)
+    }
 }
 </script>
 

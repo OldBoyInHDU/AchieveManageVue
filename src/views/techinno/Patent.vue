@@ -63,7 +63,7 @@
                             :on-success="handleSuccess1"
                             :on-remove="handleRemove1"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/patentUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -77,7 +77,7 @@
                             :on-success="handleSuccess2"
                             :on-remove="handleRemove2"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/patentUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -91,7 +91,7 @@
                             :on-success="handleSuccess3"
                             :on-remove="handleRemove3"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/patentUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -177,6 +177,7 @@ export default {
     name: 'patent',
     data() {
         return {
+            actionURL: '', //http://localhost:8080/achieve/techInno/patentUpload
             // 搜索 select组件
             statusList: [
                 {
@@ -591,6 +592,11 @@ export default {
             )
         },
     },
+    mounted() {
+        //http://localhost:8080/achieve/techInno/patentUpload
+        this.actionURL = this.api.BaseURL + 'techInno/patentUpload'
+        // console.log(this.actionURL)
+    }
 }
 </script>
 

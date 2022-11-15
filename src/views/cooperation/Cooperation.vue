@@ -93,6 +93,7 @@ export default Vue.extend({
     components: { Editor, Toolbar },
     data() {
         return {
+            actionURL: '',
             typeList: [
                 {
                     value: '业外_外出交流',
@@ -178,7 +179,7 @@ export default Vue.extend({
                 MENU_CONF: {
                     uploadImage: {
                         fieldName: 'file',
-                        server: 'http://localhost:8080/achieve/uploadImg',
+                        server: 'http://localhost:8080/achieve/uploadImg', //http://localhost:8080/achieve/uploadImg
                         maxFileSize: 5 * 1024 * 1024, // 5M
                         maxNumberOfFiles: 10,
                         allowedFileTypes: ['image/*'],
@@ -451,6 +452,9 @@ export default Vue.extend({
         // setTimeout(() => {
         //     this.html = '<p>模拟 Ajax 异步设置内容 HTML</p>'
         // }, 1500)
+        //http://localhost:8080/achieve/uploadImg
+        // this.editorConfig.MENU_CONF.uploadImage.server = this.api.BaseURL + 'uploadImg'
+        // console.log(this.editorConfig.MENU_CONF.uploadImage.server)
     },
     beforeDestroy() {
         const editor = this.editor

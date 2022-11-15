@@ -80,7 +80,7 @@
                             :on-success="handleSuccess"
                             :on-remove="handleRemove"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/award/awardUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -149,6 +149,7 @@ export default {
     name: 'award',
     data() {
         return {
+            actionURL: '', // http://localhost:8080/achieve/award/awardUpload
             typeList: [
                 {
                     value: '个人荣誉',
@@ -553,6 +554,11 @@ export default {
             )
         },
     },
+    mounted() {
+        //http://localhost:8080/achieve/award/awardUpload
+        this.actionURL = this.api.BaseURL + 'award/awardUpload'
+        // console.log(this.actionURL)
+    }
 }
 </script>
 

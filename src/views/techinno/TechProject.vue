@@ -82,7 +82,7 @@
                             :on-remove="handleRemove"
                             multiple
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/techInno/tpUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -156,6 +156,7 @@ export default {
     name: 'techProject',
     data() {
         return {
+            actionURL: '', // http://localhost:8080/achieve/techInno/tpUpload
             typeList: [
                 {
                     value: '烟草农业',
@@ -598,6 +599,11 @@ export default {
             )
         },
     },
+    mounted() {
+        //http://localhost:8080/achieve/techInno/tpUpload
+        this.actionURL = this.api.BaseURL + 'techInno/tpUpload'
+        // console.log(this.actionURL)
+    }
 }
 </script>
 

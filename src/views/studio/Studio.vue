@@ -1,7 +1,7 @@
 <template>
     <div class="container" style="margin: 20px">
         <div class="search">
-            <Select v-model="type" style="width:150px" placeholder="工作室/领班人" clearable>
+            <Select v-model="type" style="width:150px" placeholder="工作室/领办人" clearable>
                 <Option v-for="item in typeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
             </Select>
             <Button type="primary" style="margin-left: 20px" @click="search">查询</Button>
@@ -20,8 +20,8 @@
                 @on-ok="submit"
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="formItem" :label-width="120">
-                    <FormItem label="工作室/领班人" required>
-                        <Select v-model="formItem.type" style="width:150px" placeholder="工作室/领班人" clearable>
+                    <FormItem label="工作室/领办人" required>
+                        <Select v-model="formItem.type" style="width:150px" placeholder="工作室/领办人" clearable>
                             <Option v-for="item in typeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                         </Select>
                     </FormItem>
@@ -35,7 +35,7 @@
                             :on-success="handleSuccess"
                             :on-remove="handleRemove"
                             accept="application/pdf"
-                            action="http://localhost:8080/achieve/studio/profileUpload">
+                            :action="actionURL">
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
                             <!--                            <div slot="tip">支持文件类型:.pdf，文件大小不超过20mb</div>-->
                         </Upload>
@@ -52,7 +52,7 @@
                 @on-cancel="cancel" scrollable draggable>
                 <Form :model="resultItem" :label-width="120">
                     <FormItem label="简介文档标题" required>
-                        <Input v-model="resultItem.type" placeholder="工作室/领班人" readonly></Input>
+                        <Input v-model="resultItem.type" placeholder="工作室/领办人" readonly></Input>
                     </FormItem>
                     <divider orientation="center">附件下载</divider>
                     <FormItem label="简介文档" >
@@ -88,14 +88,15 @@ export default {
     name: 'studio',
     data() {
         return {
+            actionURL: '', // http://localhost:8080/achieve/studio/profileUpload
             typeList: [
                 {
                     value: '工作室简介',
                     label: '工作室简介'
                 },
                 {
-                    value: '领班人简介',
-                    label: '领班人简介'
+                    value: '领办人简介',
+                    label: '领办人简介'
                 },
             ],
             type: '',
@@ -363,6 +364,11 @@ export default {
             )
         },
     },
+    mounted() {
+        //http://localhost:8080/achieve/studio/profileUpload
+        this.actionURL = this.api.BaseURL + 'studio/profileUpload'
+        // console.log(this.actionURL)
+    }
 }
 </script>
 
